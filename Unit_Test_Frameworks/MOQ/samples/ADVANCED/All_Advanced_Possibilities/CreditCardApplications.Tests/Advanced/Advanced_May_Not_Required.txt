@@ -1,0 +1,5 @@
+6 - Demo Recursive Mocking
+Mock objects returning MOCK objects which are inside them
+
+8 - Demo Centralizing Mock Creation
+MockFactory class - which can hold multiple mock objects and can verify all expectations on the mock objects with single VERIFY on it.
