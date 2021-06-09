@@ -1,0 +1,2 @@
+to generate PRODUCT-DETAIL PAGE
+D:\R\git\all-languages\Angular\Projects\ProductManagement\6-navigation\my-pm\src\app\products>ng g c product-detail

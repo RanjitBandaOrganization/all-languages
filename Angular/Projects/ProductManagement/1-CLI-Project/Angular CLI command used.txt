@@ -1,0 +1,6 @@
+//install angular CLI 
+npm install -g @angular/cli
+
+
+//create new application my-pm and skip install
+ng new my-pm --skip-install

@@ -1,0 +1,2 @@
+/*TO CREATE STAR COMPONENT*/
+ng g c star
