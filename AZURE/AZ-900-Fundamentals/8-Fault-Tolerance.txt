@@ -1,0 +1,14 @@
+Fault tolerance describes how Azure
+will ensure you have zero downtime
+for services provided by Azure.
+
+
+
+=	=	=	=	=	=
+
+
+
+-As with high availability, fault tolerance is a term that's used to describe the resilience(the capacity to recover quickly from difficulties; toughness) of cloud computing.
+-----Where high availability doesn't guarantee zero downtime,a fault tolerance system does.
+-------As the name implies, the cloud system is tolerant to any faults that may occur.
+-------Tolerant meaning that any fault in the system that causes Azure services to fail are mitigated and dealt with by Azure itself.

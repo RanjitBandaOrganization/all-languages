@@ -1,0 +1,17 @@
+Agility means the ability to rapidly develop,
+test, and launch software applications.
+
+
+=	=	=	=	=	=
+Agility, when it comes to cloud computing,
+relates to both the business and the computing context.
+
+In the cloud computing context,
+agility often refers to the ability
+to rapidly develop, test, and launch
+software applications that drive business growth.
+
+Cloud agility allows businesses
+to focus on other issues,
+such as security, monitoring, and analysis,
+instead of provisioning and maintaining the resources.

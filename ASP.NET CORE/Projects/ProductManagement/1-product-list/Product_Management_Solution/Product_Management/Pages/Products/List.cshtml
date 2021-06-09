@@ -1,0 +1,45 @@
+﻿@page
+@model Product_Management.Pages.Products.ListModel
+@{
+}
+<h1>@Model.PageTitle</h1>
+
+<span>Enter Text To Filter:</span>
+<input asp-for="SearchTerm" />
+<span>@Model.SearchTerm</span>
+
+<table class='table'>
+    <thead>
+        <tr>
+            <th>
+                <button class='btn btn-primary' value='Show Image' (click)='toggleImage()'>
+                    @Model.ImageButtonTitle Image
+                </button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <img src=@product.imageUrl
+                             title=@product.productName
+                             style.width.px='40'
+                             style.margin.px='2'
+                             />
+                    </td>
+                    <td> @product.productName</td>
+                    <td>@product.productCode</td>
+                    <td>@product.releaseDate</td>
+                    <td>@product.price</td>
+                    <td>@product.starRating</td>
+                </tr>
+            }
+    </tbody>
+</table>

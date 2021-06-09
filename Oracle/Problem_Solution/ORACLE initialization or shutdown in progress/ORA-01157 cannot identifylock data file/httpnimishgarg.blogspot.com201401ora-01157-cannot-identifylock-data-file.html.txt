@@ -1,0 +1,32 @@
+C:\>sqlplus sys/sys as sysdba
+SQL*Plus: Release 11.2.0.3.0 Production on Tue Apr 30 19:07:16 2013
+Copyright (c) 1982, 2011, Oracle.  All rights reserved.
+Connected to an idle instance.
+
+SQL> startup
+ORACLE instance started.
+Total System Global Area  778387456 bytes
+Fixed Size                  1384856 bytes
+Variable Size             520097384 bytes
+Database Buffers          251658240 bytes
+Redo Buffers                5246976 bytes
+Database mounted.
+ORA-01157: cannot identify/lock data file 11 – see DBWR trace file
+ORA-01110: data file 16: 'E:\oracle\app\nimish.garg\oradata\orcl\test_ts.dbf'
+
+SQL> select NAME from v$datafile where file#=16;
+NAME
+--------------------------------------------------------------------------------
+E:\ORACLE\APP\NIMISH.GARG\ORADATA\ORCL\TEST_TS.DBF
+
+SQL> alter database datafile 16 OFFLINE DROP;
+Database altered.
+
+SQL> alter database open;
+Database altered.
+
+SQL> select status, database_status from v$instance;
+
+STATUS       DATABASE_STATUS
+------------ -----------------
+OPEN         ACTIVE

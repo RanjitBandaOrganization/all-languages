@@ -1,0 +1,15 @@
+﻿@page "{productId:int}"
+@model Product_Management.Pages.Products.DetailsModel
+@{
+}
+
+<h2>@Model.Product.productName</h2>
+<div>
+    Id: @Model.Product.productId
+</div>
+<div>
+    Product Code: @Model.Product.productCode
+</div>
+
+<a asp-page="./List" class="btn btn-default">All Restaurants</a>
+
