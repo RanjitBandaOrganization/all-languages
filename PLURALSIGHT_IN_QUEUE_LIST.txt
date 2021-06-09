@@ -1,0 +1,9 @@
+
+RxJS in Angular: Reactive Development
+RxJS: Getting Started
+Learning RxJS Operators by Example Playbook
+Getting Started with Reactive Programming Using RxJS
+Play by Play: Angular 2/RxJS/HTTP and RESTful Services with John Papa and Dan Wahlin
+Unit Testing RxJS with Marble Diagrams
+
+	-	-	-	
