@@ -69,7 +69,7 @@ namespace CourseLibrary.API.Services
                 throw new ArgumentNullException(nameof(authorId));
             }
 
-            return _authorData.GetAuthors().FirstOrDefault(a => a.Id == authorId);
+            return _authorData.Authors.FirstOrDefault(a => a.Id == authorId);
         }
 
 
@@ -80,7 +80,7 @@ namespace CourseLibrary.API.Services
                 throw new ArgumentNullException(nameof(authorId));
             }
 
-            return _authorData.GetAuthors().Any(a => a.Id == authorId);
+            return _authorData.Authors.Any(a => a.Id == authorId);
         }
 
         public Course GetCourse(Guid authorId, Guid courseId)
@@ -95,7 +95,7 @@ namespace CourseLibrary.API.Services
                 throw new ArgumentNullException(nameof(courseId));
             }
 
-            return _authorData.GetAuthors().Where(a => a.Id == authorId).First().Courses.Where(b => b.Id == courseId).FirstOrDefault();
+            return _authorData.Authors.Where(a => a.Id == authorId).First().Courses.Where(b => b.Id == courseId).FirstOrDefault();
             //return _context.Courses
             //  .Where(c => c.AuthorId == authorId && c.Id == courseId).FirstOrDefault();
         }
@@ -107,7 +107,7 @@ namespace CourseLibrary.API.Services
                 throw new ArgumentNullException(nameof(authorId));
             }
 
-            return _authorData.GetAuthors().Where(a => a.Id == authorId).First().Courses;
+            return _authorData.Authors.Where(a => a.Id == authorId).First().Courses;
             //return _context.Courses
             //            .Where(c => c.AuthorId == authorId)
             //            .OrderBy(c => c.Title).ToList();
@@ -151,7 +151,10 @@ namespace CourseLibrary.API.Services
             }
             // always set the AuthorId to the passed-in authorId
             course.AuthorId = authorId;
-            course.Id = Guid.NewGuid();
+            if(course.Id == Guid.Empty)
+            {
+                course.Id = Guid.NewGuid();
+            }
             _authorData.Authors.First(x => x.Id == authorId).Courses.Add(course);
         }
 
@@ -177,10 +180,10 @@ namespace CourseLibrary.API.Services
 
 
 
-        //public void UpdateCourse(Course course)
-        //{
-        //    // no code in this implementation
-        //}
+        public void UpdateCourse(Course course)
+        {
+            // no code in this implementation
+        }
 
 
         //public void DeleteAuthor(Author author)
