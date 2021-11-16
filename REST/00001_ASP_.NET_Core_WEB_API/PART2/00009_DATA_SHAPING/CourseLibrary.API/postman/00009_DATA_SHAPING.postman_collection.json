@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "cddff52c-70e4-4223-ab75-40cdf71c6e2f",
+		"name": "00009_DATA_SHAPING",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Authors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (pageNumber = 1, pageSize = 2)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?pageNumber=1&pageSize=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (pageNumber = 1, pageSize = 100)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?pageNumber=1&pageSize=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (pageNumber = 2, pageSize = 2)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?pageNumber=2&pageSize=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = name)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = name desc)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=name desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "name desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = name desc, pageNumber = 2, pageSize = 10)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=name desc&pageNumber=2&pageSize=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "name desc"
+						},
+						{
+							"key": "pageNumber",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = mainCategory)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=mainCategory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "mainCategory"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = mainCategory desc)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=maincategory desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "maincategory desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = dateofbirth) (should fail)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=dateofbirth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "dateofbirth"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = name, searchQuery = a, mainCategory = Singing, pageNumber = 1, pageSize = 2)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=name&pageNumber=1&pageSize=2&searchQuery=a&mainCategory=rum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "name"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "searchQuery",
+							"value": "a"
+						},
+						{
+							"key": "mainCategory",
+							"value": "rum"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (orderBy = age, mainCategory desc)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?orderBy=age, mainCategory desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "age, mainCategory desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (fields = id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?fields=id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Author (fields = id, name)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35?fields=id,name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors",
+						"d28888e9-2ba9-473a-a40f-e38cb54f9b35"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "id,name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (fields = id, name)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?fields=id,name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "id,name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Author (fields = FirstName) (should fail)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35?fields=FirstName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors",
+						"d28888e9-2ba9-473a-a40f-e38cb54f9b35"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "FirstName"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Authors (fields = FirstName) (should fail)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:51044/api/authors?fields=FirstName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "51044",
+					"path": [
+						"api",
+						"authors"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "FirstName"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
