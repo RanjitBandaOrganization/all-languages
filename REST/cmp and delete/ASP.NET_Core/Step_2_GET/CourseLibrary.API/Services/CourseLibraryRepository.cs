@@ -21,12 +21,11 @@ namespace CourseLibrary.API.Services
             return _authorData.GetAuthors();
         }
 
-      
-
         public void RestoreDataStore()
         {
             _authorData.RestoreDataStore();
         }
+
 
         public Author GetAuthor(Guid authorId)
         {
@@ -143,6 +142,8 @@ namespace CourseLibrary.API.Services
 
         //    _context.Authors.Remove(author);
         //}
+
+
 
         //public void UpdateAuthor(Author author)
         //{
