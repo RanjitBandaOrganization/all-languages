@@ -1,4 +1,8 @@
-﻿using CourseLibrary.API.Services;
+﻿using AutoMapper;
+using CourseLibrary.API.Helpers;
+using CourseLibrary.API.Models;
+using CourseLibrary.API.ResourceParameters;
+using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,29 +21,56 @@ namespace CourseLibrary.API.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly ICourseLibraryRepository _courseLibraryRepository;
+        private readonly IMapper _mapper;
 
-        public AuthorsController(ICourseLibraryRepository courseLibraryRepository)
+        public AuthorsController(ICourseLibraryRepository courseLibraryRepository,
+            IMapper mapper)
         {
             _courseLibraryRepository = courseLibraryRepository ??
                 throw new ArgumentNullException(nameof(courseLibraryRepository));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
             _courseLibraryRepository.RestoreDataStore();
         }
 
         //////To return data, we need to add an action on our controller.
         //////IActionResult defines a contract that represents the results of an action method.
-		////[HttpGet("api/authors")]
+        ////[HttpGet("api/authors")]
         [HttpGet()]
-        public IActionResult GetAuthors()
+        [HttpHead()]
+        //public IActionResult GetAuthors()
+        public ActionResult<IEnumerable<AuthorDto>> GetAuthors(
+            //[FromQuery]string mainCategory
+            //[FromQuery(Name = "mainCategory")] string mainCategory
+            //string mainCategory,
+            //string searchQuery
+            //BY DEFAULT THE COMPLEX TYPE IS EXPECTED TO BE BIND USING FROMBODY RESOURCE, AS CURRENTLY WE ARE SENDING VIA QUERY PARAMETERS
+            //WE HAVE TO EXPLICITY MENTION AS FROMQUERY TO POPULATE THIS COMPLEX TYPE USING QUERY PARAMETER VALUES
+            [FromQuery]AuthorsResourceParameters authorsResourceParameters
+            )
         {
-            var authorsFromRepo = _courseLibraryRepository.GetAuthors();
+            var authorsFromRepo = _courseLibraryRepository.GetAuthors(authorsResourceParameters);
+            //var authors = new List<AuthorDto>();
+
+            //foreach (var author in authorsFromRepo)
+            //{
+            //    authors.Add(new AuthorDto()
+            //    {
+            //        Id = author.Id,
+            //        Name = $"{author.FirstName} {author.LastName}",
+            //        MainCategory = author.MainCategory,
+            //        Age = author.DateOfBirth.GetCurrentAge()
+            //    });
+            //}
+            var authors = _mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
             //////JsonResult is an action result which formats the given object as JSON.
             //return new JsonResult(authorsFromRepo);
-            return Ok(authorsFromRepo);
+            return Ok(authors);
         }
 
         //[HttpGet("{authorId:guid}")]  - with route constraint, if the method have overloading
         [HttpGet("{authorId}")]
-        public IActionResult GetAuthor(Guid authorId)
+        public ActionResult<AuthorDto> GetAuthor(Guid authorId)
         {
             var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
 
@@ -48,7 +79,7 @@ namespace CourseLibrary.API.Controllers
                 return NotFound();
             }
 
-            return Ok(authorFromRepo);
+            return Ok(_mapper.Map<AuthorDto>(authorFromRepo));
         }
     }
 }

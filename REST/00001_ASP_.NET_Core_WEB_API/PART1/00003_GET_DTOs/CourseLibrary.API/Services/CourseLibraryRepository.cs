@@ -36,11 +36,11 @@ namespace CourseLibrary.API.Services
             //}
             //else
             //{
-                if (!string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory))
-                {
-                    authorsResourceParameters.MainCategory = authorsResourceParameters.MainCategory.Trim();
-                    returnedAuthors = returnedAuthors.Where(x => x.MainCategory == authorsResourceParameters.MainCategory).ToList();
-                }
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory))
+            {
+                authorsResourceParameters.MainCategory = authorsResourceParameters.MainCategory.Trim();
+                returnedAuthors = returnedAuthors.Where(x => x.MainCategory == authorsResourceParameters.MainCategory).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
             {

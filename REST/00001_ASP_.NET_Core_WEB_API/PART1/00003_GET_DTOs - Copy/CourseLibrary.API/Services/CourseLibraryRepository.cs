@@ -1,5 +1,6 @@
 ﻿using CourseLibrary.API.DataStore;
 using CourseLibrary.API.Entities;
+using CourseLibrary.API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,40 @@ namespace CourseLibrary.API.Services
         {
             return _authorData.GetAuthors();
         }
+        public IEnumerable<Author> GetAuthors(
+            //string mainCategory, string SearchQuery
+            AuthorsResourceParameters authorsResourceParameters
+            )
+        {
+            IEnumerable<Author> returnedAuthors = null;
+
+            returnedAuthors = _authorData.GetAuthors();
+
+            //if (string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory)
+            //    && string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
+            //{
+            //}
+            //else
+            //{
+                if (!string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory))
+                {
+                    authorsResourceParameters.MainCategory = authorsResourceParameters.MainCategory.Trim();
+                    returnedAuthors = returnedAuthors.Where(x => x.MainCategory == authorsResourceParameters.MainCategory).ToList();
+                }
+
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
+            {
+                authorsResourceParameters.MainCategory = authorsResourceParameters.SearchQuery.Trim();
+                returnedAuthors = returnedAuthors.Where(x => x.MainCategory.Contains(authorsResourceParameters.SearchQuery)
+                || x.FirstName.Contains(authorsResourceParameters.SearchQuery)
+                || x.LastName.Contains(authorsResourceParameters.SearchQuery)
+                ).ToList();
+            }
+            //}
+
+
+            return returnedAuthors;
+        }
 
         public void RestoreDataStore()
         {
@@ -37,6 +72,46 @@ namespace CourseLibrary.API.Services
             return _authorData.GetAuthors().FirstOrDefault(a => a.Id == authorId);
         }
 
+
+        public bool AuthorExists(Guid authorId)
+        {
+            if (authorId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(authorId));
+            }
+
+            return _authorData.GetAuthors().Any(a => a.Id == authorId);
+        }
+
+        public Course GetCourse(Guid authorId, Guid courseId)
+        {
+            if (authorId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(authorId));
+            }
+
+            if (courseId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(courseId));
+            }
+
+            return _authorData.GetAuthors().Where(a => a.Id == authorId).First().Courses.Where(b => b.Id == courseId).FirstOrDefault();
+            //return _context.Courses
+            //  .Where(c => c.AuthorId == authorId && c.Id == courseId).FirstOrDefault();
+        }
+
+        public IEnumerable<Course> GetCourses(Guid authorId)
+        {
+            if (authorId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(authorId));
+            }
+
+            return _authorData.GetAuthors().Where(a => a.Id == authorId).First().Courses;
+            //return _context.Courses
+            //            .Where(c => c.AuthorId == authorId)
+            //            .OrderBy(c => c.Title).ToList();
+        }
         ////// public IEnumerable<Author> GetAuthors(IEnumerable<Guid> authorIds)
         //////{
         //////    //if (authorIds == null)
@@ -72,33 +147,7 @@ namespace CourseLibrary.API.Services
         //    _context.Courses.Remove(course);
         //}
 
-        //public Course GetCourse(Guid authorId, Guid courseId)
-        //{
-        //    if (authorId == Guid.Empty)
-        //    {
-        //        throw new ArgumentNullException(nameof(authorId));
-        //    }
 
-        //    if (courseId == Guid.Empty)
-        //    {
-        //        throw new ArgumentNullException(nameof(courseId));
-        //    }
-
-        //    return _context.Courses
-        //      .Where(c => c.AuthorId == authorId && c.Id == courseId).FirstOrDefault();
-        //}
-
-        //public IEnumerable<Course> GetCourses(Guid authorId)
-        //{
-        //    if (authorId == Guid.Empty)
-        //    {
-        //        throw new ArgumentNullException(nameof(authorId));
-        //    }
-
-        //    return _context.Courses
-        //                .Where(c => c.AuthorId == authorId)
-        //                .OrderBy(c => c.Title).ToList();
-        //}
 
         //public void UpdateCourse(Course course)
         //{
@@ -123,15 +172,6 @@ namespace CourseLibrary.API.Services
         //    _context.Authors.Add(author);
         //}
 
-        //public bool AuthorExists(Guid authorId)
-        //{
-        //    if (authorId == Guid.Empty)
-        //    {
-        //        throw new ArgumentNullException(nameof(authorId));
-        //    }
-
-        //    return _context.Authors.Any(a => a.Id == authorId);
-        //}
 
         //public void DeleteAuthor(Author author)
         //{

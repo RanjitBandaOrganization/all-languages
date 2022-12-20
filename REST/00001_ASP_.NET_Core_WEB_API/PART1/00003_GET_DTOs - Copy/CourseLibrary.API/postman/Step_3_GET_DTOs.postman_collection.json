@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors",
+					"raw": "http://localhost:51044/api/authors",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors"
@@ -31,12 +31,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35",
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -52,12 +52,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/a8d15573-ec65-4f48-97d2-2e7c0a726c33",
+					"raw": "http://localhost:51044/api/authors/a8d15573-ec65-4f48-97d2-2e7c0a726c33",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -78,12 +78,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35",
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -104,12 +104,12 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35",
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -125,12 +125,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35/courses",
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35/courses",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -147,12 +147,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/b29e03b5-ba28-4489-8834-689de28af370/courses",
+					"raw": "http://localhost:51044/api/authors/b29e03b5-ba28-4489-8834-689de28af370/courses",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -169,12 +169,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35/courses/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b",
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35/courses/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -192,12 +192,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/b29e03b5-ba28-4489-8834-689de28af370/courses/bc4c35c3-3857-4250-9449-155fcf5109ec",
+					"raw": "http://localhost:51044/api/authors/b29e03b5-ba28-4489-8834-689de28af370/courses/bc4c35c3-3857-4250-9449-155fcf5109ec",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -215,12 +215,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35/courses/8afc4f43-3d02-429b-90c7-1cabe201bf7a",
+					"raw": "http://localhost:51044/api/authors/d28888e9-2ba9-473a-a40f-e38cb54f9b35/courses/8afc4f43-3d02-429b-90c7-1cabe201bf7a",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors",
@@ -238,12 +238,12 @@
 				"method": "HEAD",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors",
+					"raw": "http://localhost:51044/api/authors",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors"
@@ -258,12 +258,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors?mainCategory=Rum",
+					"raw": "http://localhost:51044/api/authors?mainCategory=Rum",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors"
@@ -284,12 +284,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors?searchQuery=a",
+					"raw": "http://localhost:51044/api/authors?searchQuery=a",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors"
@@ -310,12 +310,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7089/api/authors?mainCategory=Rum&searchQuery=a",
+					"raw": "http://localhost:51044/api/authors?mainCategory=Rum&searchQuery=a",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "7089",
+					"port": "51044",
 					"path": [
 						"api",
 						"authors"

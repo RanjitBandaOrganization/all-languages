@@ -15,7 +15,8 @@ namespace CourseLibrary.API.DataStore
         }
         public IEnumerable<Author> GetAuthors()
         {
-            return JsonConvert.DeserializeObject<IEnumerable<Author>>(File.ReadAllText(@"DataStore\Authors.json"));
+            var authors = JsonConvert.DeserializeObject<IEnumerable<Author>>(File.ReadAllText(@"DataStore\Authors.json"));
+            return authors;
         }
 
         public void RestoreDataStore()

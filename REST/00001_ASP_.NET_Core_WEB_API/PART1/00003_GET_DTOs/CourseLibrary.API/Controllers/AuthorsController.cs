@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using CourseLibrary.API.Helpers;
 using CourseLibrary.API.Models;
 using CourseLibrary.API.ResourceParameters;
 using CourseLibrary.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CourseLibrary.API.Controllers
 {
@@ -35,7 +32,7 @@ namespace CourseLibrary.API.Controllers
 
         //////To return data, we need to add an action on our controller.
         //////IActionResult defines a contract that represents the results of an action method.
-        ////[HttpGet("api/authors")]
+		////[HttpGet("api/authors")]
         [HttpGet()]
         [HttpHead()]
         //public IActionResult GetAuthors()
@@ -46,7 +43,7 @@ namespace CourseLibrary.API.Controllers
             //string searchQuery
             //BY DEFAULT THE COMPLEX TYPE IS EXPECTED TO BE BIND USING FROMBODY RESOURCE, AS CURRENTLY WE ARE SENDING VIA QUERY PARAMETERS
             //WE HAVE TO EXPLICITY MENTION AS FROMQUERY TO POPULATE THIS COMPLEX TYPE USING QUERY PARAMETER VALUES
-            [FromQuery]AuthorsResourceParameters authorsResourceParameters
+            [FromQuery] AuthorsResourceParameters authorsResourceParameters
             )
         {
             var authorsFromRepo = _courseLibraryRepository.GetAuthors(authorsResourceParameters);
