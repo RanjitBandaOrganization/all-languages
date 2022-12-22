@@ -1,52 +1,51 @@
 using CourseLibrary.API.DataStore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using CourseLibrary.API.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CourseLibrary.API
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+//xmlDataContractSerializer - formatter is used for CONTENT NEGOTIATION FEATURE
+builder.Services.AddControllers(setupAction =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            //RANJIT - configurating and running the app
-            //  As ours is a web application, so this needs to be hosted.   So the below method is doing the same
-            //CreateHostBuilder(args).Build().Run();
-            var host = CreateHostBuilder(args).Build();
+    //THE BELOW IS THE DEFAULT BEHAVIOUR
+    //setupAction.ReturnHttpNotAcceptable = false; 
+    setupAction.ReturnHttpNotAcceptable = true;
+    //setupAction.OutputFormatters.Add(
+    //    new XmlDataContractSerializerOutputFormatter());
+}).AddXmlDataContractSerializerFormatters();
 
-            // migrate the database.  Best practice = in Main, using service scope
-            using (var scope = host.Services.CreateScope())
-            {
-                try
-                {
-                    var context = scope.ServiceProvider.GetService<IAuthorData>();
-                    // for demo purposes, delete the database & migrate on startup so 
-                    // we can start with a clean slate
-                    ////context.Database.EnsureDeleted();
-                    ////context.Database.Migrate();
-                    context.RestoreDataStore();
-                }
-                catch (Exception ex)
-                {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while migrating the database.");
-                }
-            }
+//LETS MAKE SURE THAT THE AUTOMAPPER SERVICES ARE REGISTERED IN THE CONTAINER
+//We are loading all profiles from all the assemblies
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            host.Run();
-        }
+//RANJIT - Dependency Injection relations are registered
+builder.Services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
+builder.Services.AddScoped<IAuthorData, AuthorData>();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+//RANJIT - UseRouting, UseEndpoints, MapControllers are related to have the request ROUTE to the controller
+app.UseRouting();
+
+
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
