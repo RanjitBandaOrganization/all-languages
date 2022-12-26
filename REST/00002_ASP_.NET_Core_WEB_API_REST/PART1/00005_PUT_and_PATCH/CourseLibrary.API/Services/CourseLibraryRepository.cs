@@ -36,11 +36,11 @@ namespace CourseLibrary.API.Services
             //}
             //else
             //{
-                if (!string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory))
-                {
-                    authorsResourceParameters.MainCategory = authorsResourceParameters.MainCategory.Trim();
-                    returnedAuthors = returnedAuthors.Where(x => x.MainCategory == authorsResourceParameters.MainCategory).ToList();
-                }
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory))
+            {
+                authorsResourceParameters.MainCategory = authorsResourceParameters.MainCategory.Trim();
+                returnedAuthors = returnedAuthors.Where(x => x.MainCategory == authorsResourceParameters.MainCategory).ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
             {
@@ -151,7 +151,7 @@ namespace CourseLibrary.API.Services
             }
             // always set the AuthorId to the passed-in authorId
             course.AuthorId = authorId;
-            if(course.Id == Guid.Empty)
+            if (course.Id == Guid.Empty)
             {
                 course.Id = Guid.NewGuid();
             }

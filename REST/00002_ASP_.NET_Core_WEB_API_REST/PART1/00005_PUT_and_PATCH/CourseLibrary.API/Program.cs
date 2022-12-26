@@ -1,52 +1,89 @@
 using CourseLibrary.API.DataStore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using CourseLibrary.API.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
 
-namespace CourseLibrary.API
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers()
+//we should send our requests with application/json-patch+json as media type.
+//Let's send this, and we hit an error. 
+//That looks strange, right? Our input is as it should be. 
+//Well, the issue here is that the default JSON parsed in ASP.NET Core 3.0 is not as feature complete as something like JSON.NET.
+//It probably will get closer with future releases, but at the moment it's not there yet. So, what we can do is use JSON.NET, as most of you are probably used to.
+//let's open the Startup class. Let's scroll down a bit. What we want to do is chain AddNewtonsoftJson to the IMvcBuilder
+//The only thing I prefer to change is the contract resolver, so properties are always nicely CamelCased. To do that, simply set it to a new instance of CamelCasePropertyNamesContractResolver. That's defined in Newtonsoft.Json .Serialization.
+//.AddNewtonsoftJson(setupAction =>
+//{
+//    setupAction.SerializerSettings.ContractResolver =
+//        new CamelCasePropertyNamesContractResolver();
+//})
+;
+//xmlDataContractSerializer - formatter is used for CONTENT NEGOTIATION FEATURE
+builder.Services.AddControllers(setupAction =>
 {
-    public class Program
+    //THE BELOW IS THE DEFAULT BEHAVIOUR
+    //setupAction.ReturnHttpNotAcceptable = false; 
+    setupAction.ReturnHttpNotAcceptable = true;
+    //setupAction.OutputFormatters.Add(
+    //    new XmlDataContractSerializerOutputFormatter());
+})
+.AddXmlDataContractSerializerFormatters()
+.ConfigureApiBehaviorOptions(setupAction =>
+{
+    setupAction.InvalidModelStateResponseFactory = context =>
     {
-        public static void Main(string[] args)
+        var problemDetails = new ValidationProblemDetails(context.ModelState)
         {
-            //RANJIT - configurating and running the app
-            //  As ours is a web application, so this needs to be hosted.   So the below method is doing the same
-            //CreateHostBuilder(args).Build().Run();
-            var host = CreateHostBuilder(args).Build();
+            Type = "https://courselibrary.com/modelvalidationproblem",
+            Title = "One or more model validation errors occurred.",
+            Status = StatusCodes.Status422UnprocessableEntity,
+            Detail = "See the errors property for details.",
+            Instance = context.HttpContext.Request.Path
+        };
 
-            // migrate the database.  Best practice = in Main, using service scope
-            using (var scope = host.Services.CreateScope())
-            {
-                try
-                {
-                    var context = scope.ServiceProvider.GetService<IAuthorData>();
-                    // for demo purposes, delete the database & migrate on startup so 
-                    // we can start with a clean slate
-                    ////context.Database.EnsureDeleted();
-                    ////context.Database.Migrate();
-                    context.RestoreDataStore();
-                }
-                catch (Exception ex)
-                {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while migrating the database.");
-                }
-            }
+        problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
 
-            host.Run();
-        }
+        return new UnprocessableEntityObjectResult(problemDetails)
+        {
+            ContentTypes = { "application/problem+json" }
+        };
+    };
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+//LETS MAKE SURE THAT THE AUTOMAPPER SERVICES ARE REGISTERED IN THE CONTAINER
+//We are loading all profiles from all the assemblies
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//RANJIT - Dependency Injection relations are registered
+builder.Services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
+builder.Services.AddScoped<IAuthorData, AuthorData>();
+
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+//RANJIT - UseRouting, UseEndpoints, MapControllers are related to have the request ROUTE to the controller
+app.UseRouting();
+
+
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
