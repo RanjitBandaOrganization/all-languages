@@ -15,6 +15,7 @@ namespace CourseLibrary.API.DataStore
 
         public AuthorData()
         {
+            RestoreDataStore();
         }
 
         public List<Author> Authors

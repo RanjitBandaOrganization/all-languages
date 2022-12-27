@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
 using CourseLibrary.API.Models;
 using CourseLibrary.API.Services;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
+
 
 namespace CourseLibrary.API.Controllers
 {
@@ -76,11 +79,10 @@ namespace CourseLibrary.API.Controllers
                 new { authorId = authorId, courseId = courseToReturn.Id },
                 courseToReturn);
         }
-        
         [HttpPut("{courseId}")]
-        public IActionResult UpdateCourseForAuthor(Guid authorId, 
-            Guid courseId, 
-            CourseForUpdateDto course)
+        public IActionResult UpdateCourseForAuthor(Guid authorId,
+        Guid courseId,
+        CourseForUpdateDto course)
         {
             if (!_courseLibraryRepository.AuthorExists(authorId))
             {
@@ -199,6 +201,7 @@ namespace CourseLibrary.API.Controllers
                 .GetRequiredService<IOptions<ApiBehaviorOptions>>();
             return (ActionResult)options.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
-
     }
+
+    
 }

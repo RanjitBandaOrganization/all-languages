@@ -36,6 +36,10 @@ builder.Services.AddControllers(setupAction =>
     //    new XmlDataContractSerializerOutputFormatter());
 })
 .AddXmlDataContractSerializerFormatters()
+.AddNewtonsoftJson(setupAction =>
+        setupAction.SerializerSettings.ContractResolver =
+            new CamelCasePropertyNamesContractResolver()
+      )
 .ConfigureApiBehaviorOptions(setupAction =>
 {
     setupAction.InvalidModelStateResponseFactory = context =>
@@ -64,7 +68,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //RANJIT - Dependency Injection relations are registered
 builder.Services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
-builder.Services.AddScoped<IAuthorData, AuthorData>();
+builder.Services.AddSingleton<IAuthorData, AuthorData>();
 
 
 var app = builder.Build();

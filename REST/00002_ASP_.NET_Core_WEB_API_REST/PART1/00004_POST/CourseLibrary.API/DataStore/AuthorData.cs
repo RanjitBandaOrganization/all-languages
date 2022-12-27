@@ -11,10 +11,12 @@ namespace CourseLibrary.API.DataStore
     public class AuthorData : IAuthorData
     {
         List<Author> _authors = null;
+        string path = @"DataStore\Authors.json";
 
 
         public AuthorData()
         {
+            RestoreDataStore();
         }
 
         public List<Author> Authors
@@ -37,7 +39,6 @@ namespace CourseLibrary.API.DataStore
         }
 
 
-        public string path = @"DataStore\Authors.json";
         public IEnumerable<Author> GetAuthors()
         {
             var authors = JsonConvert.DeserializeObject<IEnumerable<Author>>(File.ReadAllText(path));

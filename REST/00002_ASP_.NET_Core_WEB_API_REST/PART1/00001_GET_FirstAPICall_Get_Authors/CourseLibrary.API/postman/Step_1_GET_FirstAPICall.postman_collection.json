@@ -12,12 +12,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:51044/api/authors",
+					"raw": "http://localhost:7089/api/authors",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "51044",
+					"port": "7089",
 					"path": [
 						"api",
 						"authors"

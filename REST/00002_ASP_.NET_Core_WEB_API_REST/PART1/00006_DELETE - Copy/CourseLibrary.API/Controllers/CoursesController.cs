@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
 using CourseLibrary.API.Models;
 using CourseLibrary.API.Services;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-
+using System;
+using System.Collections.Generic;
 
 namespace CourseLibrary.API.Controllers
 {
@@ -79,10 +76,11 @@ namespace CourseLibrary.API.Controllers
                 new { authorId = authorId, courseId = courseToReturn.Id },
                 courseToReturn);
         }
+        
         [HttpPut("{courseId}")]
-        public IActionResult UpdateCourseForAuthor(Guid authorId,
-        Guid courseId,
-        CourseForUpdateDto course)
+        public IActionResult UpdateCourseForAuthor(Guid authorId, 
+            Guid courseId, 
+            CourseForUpdateDto course)
         {
             if (!_courseLibraryRepository.AuthorExists(authorId))
             {
@@ -171,6 +169,29 @@ namespace CourseLibrary.API.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{courseId}")]
+        public ActionResult DeleteCourseForAuthor(Guid authorId, Guid courseId)
+        {
+            if (!_courseLibraryRepository.AuthorExists(authorId))
+            {
+                return NotFound();
+            }
+
+            var courseForAuthorFromRepo = _courseLibraryRepository.GetCourse(authorId, courseId);
+
+            if (courseForAuthorFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            //As we want to be more specific about the course working with IDs here
+            //_courseLibraryRepository.DeleteCourse(courseForAuthorFromRepo);
+            _courseLibraryRepository.DeleteCourse(authorId, courseForAuthorFromRepo);
+            _courseLibraryRepository.Save();
+
+            return NoContent();
+        }
+
         public override ActionResult ValidationProblem(
             [ActionResultObjectValue] ModelStateDictionary modelStateDictionary)
         {
@@ -178,7 +199,6 @@ namespace CourseLibrary.API.Controllers
                 .GetRequiredService<IOptions<ApiBehaviorOptions>>();
             return (ActionResult)options.Value.InvalidModelStateResponseFactory(ControllerContext);
         }
-    }
 
-    
+    }
 }

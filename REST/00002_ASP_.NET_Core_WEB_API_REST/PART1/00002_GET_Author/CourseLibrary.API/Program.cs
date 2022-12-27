@@ -22,7 +22,7 @@ builder.Services.AddControllers(setupAction =>
 
 //RANJIT - Dependency Injection relations are registered
 builder.Services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
-builder.Services.AddScoped<IAuthorData, AuthorData>();
+builder.Services.AddSingleton<IAuthorData, AuthorData>();
 
 
 var app = builder.Build();

@@ -15,12 +15,14 @@ namespace CourseLibrary.API.DataStore
 
         public AuthorData()
         {
+            RestoreDataStore();
         }
 
-        public List<Author> Authors { 
+        public List<Author> Authors
+        {
             get
             {
-                if(_authors == null || !_authors.Any())
+                if (_authors == null || !_authors.Any())
                 {
                     _authors = GetAuthors().ToList();
                 }

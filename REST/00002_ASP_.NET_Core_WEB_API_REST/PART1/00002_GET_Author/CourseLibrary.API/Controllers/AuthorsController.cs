@@ -22,7 +22,6 @@ namespace CourseLibrary.API.Controllers
         {
             _courseLibraryRepository = courseLibraryRepository ??
                 throw new ArgumentNullException(nameof(courseLibraryRepository));
-            _courseLibraryRepository.RestoreDataStore();
         }
 
         //////To return data, we need to add an action on our controller.

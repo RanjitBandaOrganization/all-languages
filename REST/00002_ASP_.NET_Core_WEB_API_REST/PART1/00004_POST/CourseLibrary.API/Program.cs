@@ -49,7 +49,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //RANJIT - Dependency Injection relations are registered
 builder.Services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
-builder.Services.AddScoped<IAuthorData, AuthorData>();
+builder.Services.AddSingleton<IAuthorData, AuthorData>();
 
 
 var app = builder.Build();
